@@ -48,15 +48,20 @@
 				<?php if ( 'post' === $post_type ) : ?>
 					<?php zomer_posted_on_archive(); ?>
 				<?php endif; ?>
-				<?php if( 'band' === $post_type ) : ?>
-					<?php $twitter = get_post_meta( get_the_id(), 'twitter_name', true ); ?>
-					<?php $website = get_post_meta( get_the_id(), 'website', true ); ?>
+				<?php if( 'band' === $post_type || 'station' === $post_type ) : ?>
+					<?php $post_id = get_the_id(); ?>
+					<?php $twitter = get_post_meta( $post_id, 'twitter_name', true ); ?>
+					<?php $website = get_post_meta( $post_id, 'website', true ); ?>
+					<?php $address = get_post_meta( $post_id, 'address', true ); ?>
 
 					<?php if( $twitter ) : ?>
 						<div class="twitter">@<?php esc_attr_e( $twitter ); ?></div>
 					<?php endif; ?>
 					<?php if( $website ) : ?>
 						<div class="website"><a href="<?php echo esc_url( $website ); ?>" target="_blank"><?php echo esc_url( $website ); ?></a></div>
+					<?php endif; ?>
+					<?php if( $address ) : ?>
+						<div class="address"><?php esc_attr_e( $address['city'] ) ?> <?php esc_attr_e( $address['state'] ) ?></div>
 					<?php endif; ?>
 
 				<?php endif; ?>
